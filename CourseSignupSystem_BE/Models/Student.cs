@@ -5,6 +5,11 @@ namespace CourseSignupSystem_BE.Models
 {
     public partial class Student
     {
+        public Student()
+        {
+            ClassStudents = new HashSet<ClassStudent>();
+        }
+
         public string StudentId { get; set; } = null!;
         public string? StudentPassword { get; set; }
         public string? Firstname { get; set; }
@@ -16,5 +21,7 @@ namespace CourseSignupSystem_BE.Models
         public string? StudentAddress { get; set; }
         public string? Parent { get; set; }
         public string? ImagePath { get; set; }
+
+        public virtual ICollection<ClassStudent> ClassStudents { get; set; }
     }
 }

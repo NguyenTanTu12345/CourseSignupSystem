@@ -1,5 +1,6 @@
 ﻿using CourseSignupSystem_BE.Data;
 using CourseSignupSystem_BE.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace CourseSignupSystem_BE.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetAll()
         {
@@ -27,6 +29,7 @@ namespace CourseSignupSystem_BE.Controllers
             return await _context.Students.ToListAsync();
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> Get(string id)
         {
@@ -53,6 +56,7 @@ namespace CourseSignupSystem_BE.Controllers
             return Ok(new {message = "Create Successful~"});
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult> Update(Student student)
         {
@@ -63,6 +67,24 @@ namespace CourseSignupSystem_BE.Controllers
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
             return Ok(new { message = "Update Successful~" });
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Delete Successful~" });
         }
     }
 }

@@ -23,7 +23,6 @@ namespace CourseSignupSystem_BE.Data
         public virtual DbSet<GroupSubject> GroupSubjects { get; set; } = null!;
         public virtual DbSet<Lecturer> Lecturers { get; set; } = null!;
         public virtual DbSet<SchoolYear> SchoolYears { get; set; } = null!;
-        public virtual DbSet<ScoreType> ScoreTypes { get; set; } = null!;
         public virtual DbSet<Student> Students { get; set; } = null!;
         public virtual DbSet<Subject> Subjects { get; set; } = null!;
 
@@ -41,36 +40,110 @@ namespace CourseSignupSystem_BE.Data
             modelBuilder.Entity<Class>(entity =>
             {
                 entity.ToTable("Class");
+
+                entity.Property(e => e.ClassName).HasMaxLength(75);
+
+                entity.Property(e => e.DateStart).HasColumnType("datetime");
+
+                entity.Property(e => e.Descriptionz).HasMaxLength(300);
+
+                entity.Property(e => e.FacultyName).HasMaxLength(75);
+
+                entity.Property(e => e.ImagePath)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.SchoolYear)
+                    .WithMany(p => p.Classes)
+                    .HasForeignKey(d => d.SchoolYearId)
+                    .HasConstraintName("FK__Class__SchoolYea__286302EC");
             });
 
             modelBuilder.Entity<ClassStudent>(entity =>
             {
                 entity.ToTable("ClassStudent");
+
+                entity.Property(e => e.StudentId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.Class)
+                    .WithMany(p => p.ClassStudents)
+                    .HasForeignKey(d => d.ClassId)
+                    .HasConstraintName("FK__ClassStud__Class__34C8D9D1");
+
+                entity.HasOne(d => d.Student)
+                    .WithMany(p => p.ClassStudents)
+                    .HasForeignKey(d => d.StudentId)
+                    .HasConstraintName("FK__ClassStud__Stude__33D4B598");
             });
 
             modelBuilder.Entity<Contact>(entity =>
             {
                 entity.ToTable("Contact");
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.Messagez).HasMaxLength(500);
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(11)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<GroupSubject>(entity =>
             {
                 entity.ToTable("GroupSubject");
+
+                entity.Property(e => e.GroupSubjectName).HasMaxLength(100);
             });
 
             modelBuilder.Entity<Lecturer>(entity =>
             {
                 entity.ToTable("Lecturer");
+
+                entity.Property(e => e.DateofBirth).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Firstname).HasMaxLength(15);
+
+                entity.Property(e => e.Gender).HasMaxLength(20);
+
+                entity.Property(e => e.ImagePath).HasMaxLength(150);
+
+                entity.Property(e => e.Lastname).HasMaxLength(35);
+
+                entity.Property(e => e.LecturerAddress).HasMaxLength(100);
+
+                entity.Property(e => e.LecturerPassword).HasMaxLength(50);
+
+                entity.Property(e => e.MainSubject).HasMaxLength(75);
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(11)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.SubSubject).HasMaxLength(75);
+
+                entity.Property(e => e.TaxCode)
+                    .HasMaxLength(11)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<SchoolYear>(entity =>
             {
                 entity.ToTable("SchoolYear");
-            });
 
-            modelBuilder.Entity<ScoreType>(entity =>
-            {
-                entity.ToTable("ScoreType");
+                entity.Property(e => e.SchoolYearName).HasMaxLength(75);
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -106,6 +179,18 @@ namespace CourseSignupSystem_BE.Data
                 entity.Property(e => e.StudentAddress).HasMaxLength(100);
 
                 entity.Property(e => e.StudentPassword).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Subject>(entity =>
+            {
+                entity.Property(e => e.FacultyName).HasMaxLength(75);
+
+                entity.Property(e => e.SubjectName).HasMaxLength(100);
+
+                entity.HasOne(d => d.GroupSubject)
+                    .WithMany(p => p.Subjects)
+                    .HasForeignKey(d => d.GroupSubjectId)
+                    .HasConstraintName("FK__Subjects__GroupS__2D27B809");
             });
 
             OnModelCreatingPartial(modelBuilder);

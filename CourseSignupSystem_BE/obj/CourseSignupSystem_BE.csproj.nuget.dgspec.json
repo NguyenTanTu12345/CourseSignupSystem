@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ad\\source\\repos\\TicketManagementSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj": {}
+    "C:\\Users\\ad\\source\\repos\\CourseSignupSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ad\\source\\repos\\TicketManagementSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj": {
+    "C:\\Users\\ad\\source\\repos\\CourseSignupSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ad\\source\\repos\\TicketManagementSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj",
+        "projectUniqueName": "C:\\Users\\ad\\source\\repos\\CourseSignupSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj",
         "projectName": "CourseSignupSystem_BE",
-        "projectPath": "C:\\Users\\ad\\source\\repos\\TicketManagementSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj",
+        "projectPath": "C:\\Users\\ad\\source\\repos\\CourseSignupSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\CourseSignupSystem_BE.csproj",
         "packagesPath": "C:\\Users\\ad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ad\\source\\repos\\TicketManagementSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\obj\\",
+        "outputPath": "C:\\Users\\ad\\source\\repos\\CourseSignupSystem\\CourseSignupSystem_BE\\CourseSignupSystem_BE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ad\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.16, )"
